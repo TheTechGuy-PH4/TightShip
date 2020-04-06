@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using TightShip.Data;
 
 namespace TightShip
 {
@@ -23,6 +25,9 @@ namespace TightShip
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddDbContext<TightShipContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TightShipContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
